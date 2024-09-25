@@ -1,7 +1,59 @@
 <header class="fixed-top">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container text-center">
-            <h1 class="display-4">Attendence Management System</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <div class="container">
+            <a class="navbar-brand">Attendance Management System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item" *ngIf="isLoggedIn">
+                        <a class="nav-link" href="/dashboard" routerLinkActive="active">Dashboard</a>
+                    </li>
+                    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="attendaceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Attendance</a>
+                            <div class="dropdown-menu" aria-labelledby="attendaceDropdown">
+                                <a class="dropdown-item" href="/add-attendance">Add Attendance</a>
+                                <a class="dropdown-item" href="/get-attendance">View Attendance</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="attendaceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee</a>
+                            <div class="dropdown-menu" aria-labelledby="attendaceDropdown">
+                                <a class="dropdown-item" href="/add-employee">Add Employee</a>
+                                <a class="dropdown-item" href="/get-employee">View Employee</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <ng-container *ngIf="isLoggedIn; else loggedOut">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ fullname }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" (click)="logout()">Logout</a>
+                            </div>
+                        </li>
+                    </ng-container>
+                    <ng-template #loggedOut>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login" routerLinkActive="active">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                    </ng-template>
+                </ul>
+                
+            </div>
         </div>
-    </div>
+    </nav>
 </header>

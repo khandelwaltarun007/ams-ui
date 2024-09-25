@@ -13,6 +13,7 @@ import { RegistrationService } from '../services/registration.service';
   styleUrl: './registration.component.css'
 })
 export class RegistrationComponent {
+
   constructor(private router: Router, private registrationService: RegistrationService){}
   userData: User = new User();
 
@@ -35,5 +36,9 @@ export class RegistrationComponent {
           //this.loginError = 'Authentication failed.';
         }
     });
+  }
+
+  navigateTo(path: string) {
+    this.router.navigate([path]); // or ['/', path]
   }
 }

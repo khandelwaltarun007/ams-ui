@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { Login } from '../login/Login';
+import { UserService } from '../services/user.service';
+import { Login } from '../model/Login';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,15 +11,31 @@ import { Login } from '../login/Login';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
-  constructor(private authService: AuthService) { }
+export class DashboardComponent implements OnInit{
 
-  username: any;
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
+  userDetails: any = sessionStorage.getItem('userDetails');
+  username: any = sessionStorage.getItem('username');
+  fullname: any = sessionStorage.getItem('fullName');
 
   ngOnInit(): void {
     // Access route parameters
-    console.log('loginData:', this.authService.getUsername());
-    console.log('login session: ', this.authService.getSessionData('userSession'));
-    this.username = this.authService.getUsername();
+    if(sessionStorage.getItem('userDetails')===null){
+      this.userDetails = this.userService.getUserDetails().subscribe({
+        next: userDetails => {
+          sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
+          sessionStorage.setItem('username',userDetails.username);
+          this.fullname = userDetails.firstName + " " + userDetails.lastName;
+          sessionStorage.setItem('fullName', this.fullname);
+        },
+        error: error => {
+          console.error('Error fetching user details', error);
+        }
+    });
+    }
+  }
+
+  navigateTo(path: string) {
+    this.router.navigate([path]); // or ['/', path]
   }
 }

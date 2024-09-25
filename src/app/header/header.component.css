@@ -1,0 +1,11 @@
+.dropdown-menu {
+    right: 0; /* Align dropdown to the right */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+}
+
+.dropdown-menu {
+    z-index: 1050; /* Ensure it is above other content */
+}

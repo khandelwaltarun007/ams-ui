@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from './Login';
-import { state } from '@angular/animations';
+import { Login } from '../model/Login';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -14,17 +13,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  
   loginError: String = '';
 
   constructor(private authService: AuthService, private router: Router){}
   loginData: Login = new Login();
 
   login(): void{
-    this.authService.authenticate(this.loginData).subscribe({
+    this.authService.login(this.loginData).subscribe({
       next: response => {
         console.log('Login successful', response);
-        this.setSessionData("userSession", response);
+        this.setSessionData("userSessionToken", response.token);
         this.router.navigate(['/dashboard']);
       },
       error: error => {
@@ -38,7 +37,9 @@ export class LoginComponent {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  
+  navigateTo(path: string) {
+    this.router.navigate([path]); // or ['/', path]
+  }
 
   logout(): void {
     sessionStorage.clear();

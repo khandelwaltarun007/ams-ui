@@ -1,43 +1,49 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-center">Login</h2>
+<section class="gradient-form">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <h4 class="mt-1 mb-4 pb-1">We are The Vodafone Team</h4>
                 </div>
-                <div class="card-body">
-                    <form (ngSubmit)="login()" #loginForm="ngForm">
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" [(ngModel)]="loginData.username" class="form-control"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" [(ngModel)]="loginData.password"
-                                class="form-control" required>
-                        </div>
-                        <br>
-                        <div *ngIf="loginError" class="alert alert-danger">
-                            {{ loginError }}
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control btn btn-success"
-                                [disabled]="!loginForm.valid">Login</button>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <button type="button" (click)="resetValue()" class="form-control btn btn-secondary">Reset</button>
-                        </div>
-                        <br>
-                        <div style="text-align: right;">
-                            <a href="/registration"  style="text-decoration: none">New User</a>
-                        </div>
-                    </form>
-                </div>
+                <form (ngSubmit)="login()" #loginForm="ngForm">
+                  <p>Please login to your account</p>
+                  <div class="form-outline mb-3">
+                    <input type="text" id="form2Example11" class="form-control" name="username"
+                      placeholder="Enter username" [(ngModel)]="loginData.username" required />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" placeholder="Enter password" id="form2Example22" class="form-control" name="password" [(ngModel)]="loginData.password" required />
+                  </div>
+                  <div *ngIf="loginError" class="alert alert-danger">
+                    {{ loginError }}
+                  </div>
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Log in</button>
+                    <a class="text-muted" href="#!">Forgot password?</a>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" (click)="navigateTo('register')">Create new</button>
+                  </div>
+                </form>
+              </div>
             </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">We are more than just a company</h4>
+                <p class="small mb-0">Attendance management system provides flexibility to mark attendance
+                  of the employee and calculate the work from office attendance which provides a clear picture of the
+                  employee's attendance.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-3"></div>
+      </div>
     </div>
-</div>
+  </div>
+</section>

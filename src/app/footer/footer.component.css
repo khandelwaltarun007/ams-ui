@@ -1,0 +1,17 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ee7724; /* Change to your preferred color */
+    color: white; /* Text color */
+    padding: 0 0; /* Top and bottom padding */
+    text-align: center; /* Center the text */
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  .container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+  }
+  
