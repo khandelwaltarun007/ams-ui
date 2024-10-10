@@ -5,5 +5,6 @@ export interface Attendance {
     fullname: string;
     type: string;
     status: string;
-    comment: string;
+    comment: string | "";
+    isSelected?: boolean
 }

@@ -1,4 +1,55 @@
 .clickable {
     cursor: pointer;
   }
-  
+  .container {
+    margin-top: 2rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.card {
+    transition: transform 0.2s; /* Add a transition effect */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+}
+
+.text-right {
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+}
+
+canvas {
+    width: 100% !important; /* Ensure canvas takes full width */
+    height: auto !important; /* Maintain aspect ratio */
+}
+
+.row {
+    margin-bottom: 2rem; /* Space between rows */
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important; /* Adjust margin for card blocks */
+}
+
+.hover-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to cards */
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+.percentage-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: white; /* or any other color based on your design */
+  text-align: center;
+}

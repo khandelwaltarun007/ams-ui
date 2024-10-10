@@ -7,6 +7,7 @@ import { AddAttendenceComponent } from './attendance/add-attendence/add-attenden
 import { ViewAttendanceComponent } from './attendance/view-attendance/view-attendance.component';
 import { UpdateAttendanceComponent } from './attendance/update-attendance/update-attendance.component';
 import { authGuard } from './auth.guard';
+import { ApproveAttendanceComponent } from './attendance/approve-attendance/approve-attendance.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate:[authGuard] },
@@ -15,7 +16,8 @@ export const routes: Routes = [
     { path: 'add-attendance', component: AddAttendenceComponent },
     { path: 'get-attendance', component: ViewAttendanceComponent },
     { path: 'update-attendance', component: UpdateAttendanceComponent },
-    { path: 'register', component: RegistrationComponent}
+    { path: 'register', component: RegistrationComponent},
+    { path: 'approve-attendance', component: ApproveAttendanceComponent }
 ];
 
 @NgModule({

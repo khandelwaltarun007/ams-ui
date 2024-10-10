@@ -4,25 +4,33 @@ import { AttendanceService } from '../../services/attendance.service';
 import { Attendance } from '../../model/Attendance';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-view-attendance',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './view-attendance.component.html',
-  styleUrl: './view-attendance.component.css'
+  styleUrls: ['./view-attendance.component.css'] // Fix: use 'styleUrls' instead of 'styleUrl'
 })
-export class ViewAttendanceComponent implements OnInit{
-
+export class ViewAttendanceComponent implements OnInit {
 
   attendances: Attendance[] = [];
+  filteredAttendances: Attendance[] = [];
   currentPage = 0;
   pageSize = 10;
   totalPages = 0;
-  searchName: any;
-  
-  constructor(private attendanceService: AttendanceService){}
-  
+  totalRecords = 0;
+  pageSizes: number[] = [5, 10, 20, 50];
+
+  // Search fields
+  searchDate: string = '';
+  searchUserId: string = '';
+  searchFullName: string = '';
+  searchType: string = '';
+  searchStatus: string = '';
+  searchComment: string = '';
+
+  constructor(private attendanceService: AttendanceService) {}
+
   ngOnInit(): void {
     this.fetchAttendance();
   }
@@ -32,6 +40,8 @@ export class ViewAttendanceComponent implements OnInit{
       next: data => {
         this.attendances = data.content;
         this.totalPages = data.totalPages;
+        this.totalRecords = data.totalElements;
+        this.filteredAttendances = this.attendances; // Initialize filtered records
         console.log(data);
       },
       error: error => {
@@ -40,8 +50,22 @@ export class ViewAttendanceComponent implements OnInit{
     });
   }
 
-  onSearch(): void {
+  onPageSizeChange(): void {
+    this.currentPage = 0;
     this.fetchAttendance();
+  }
+
+  searchAttendances(): void {
+    this.filteredAttendances = this.attendances.filter(record => {
+      return (!this.searchDate || record.date.includes(this.searchDate)) &&
+             (!this.searchUserId || record.userId.toString().includes(this.searchUserId)) &&
+             (!this.searchFullName || record.fullname.toLowerCase().includes(this.searchFullName.toLowerCase())) &&
+             (!this.searchType || record.type.toLowerCase().includes(this.searchType.toLowerCase())) &&
+             (!this.searchStatus || record.status.toLowerCase().includes(this.searchStatus.toLowerCase())) &&
+             (!this.searchComment || record.comment.toLowerCase().includes(this.searchComment.toLowerCase()));
+    });
+    this.totalRecords = this.filteredAttendances.length; // Update total records count
+    this.currentPage = 0; // Reset to the first page
   }
 
   nextPage() {
@@ -61,9 +85,4 @@ export class ViewAttendanceComponent implements OnInit{
   getSequenceNumber(index: number): number {
     return this.currentPage * this.pageSize + index + 1;
   }
-
-  searchAttendances() {
-    throw new Error('Method not implemented.');
-    }
-
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from './User';
+import { UserRequest } from '../model/UserRequest';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistrationService } from '../services/registration.service';
@@ -15,7 +15,7 @@ import { RegistrationService } from '../services/registration.service';
 export class RegistrationComponent {
 
   constructor(private router: Router, private registrationService: RegistrationService){}
-  userData: User = new User();
+  userData: UserRequest = new UserRequest();
 
   onSubmit() {
     // Here you can handle form submission

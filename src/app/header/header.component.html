@@ -16,13 +16,14 @@
                             <div class="dropdown-menu" aria-labelledby="attendaceDropdown">
                                 <a class="dropdown-item" href="/add-attendance">Add Attendance</a>
                                 <a class="dropdown-item" href="/get-attendance">View Attendance</a>
+                                <a class="dropdown-item" href="/approve-attendance">Approve Attendance</a>
                             </div>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+                    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn && isAdminUser">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="attendaceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee</a>
-                            <div class="dropdown-menu" aria-labelledby="attendaceDropdown">
+                            <a class="nav-link dropdown-toggle" id="employeeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee</a>
+                            <div class="dropdown-menu" aria-labelledby="employeeDropdown">
                                 <a class="dropdown-item" href="/add-employee">Add Employee</a>
                                 <a class="dropdown-item" href="/get-employee">View Employee</a>
                             </div>

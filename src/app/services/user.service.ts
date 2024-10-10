@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../environment';
 import { Observable } from 'rxjs';
 import { CommonService } from './common.service';
+import { User } from '../model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,10 @@ export class UserService {
 
   private baseUrl = environment.baseUrl;
   
-  getUserDetails() : Observable<any> {
+  getUserDetails() : Observable<User> {
     const token = this.commonService.getSessionData('userSessionToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.commonService.createHeader(token);
     console.log(headers.get('Authorization'));
-    return this.httpClient.get<any>(`${this.baseUrl}/user/details`, { headers });
+    return this.httpClient.get<User>(`${this.baseUrl}/user/details`, { headers });
   }
 }

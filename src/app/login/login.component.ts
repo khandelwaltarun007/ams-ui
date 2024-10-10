@@ -4,38 +4,37 @@ import { Router } from '@angular/router';
 import { Login } from '../model/Login';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../services/user.service';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  
+
   loginError: String = '';
 
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, private commonService: CommonService) { }
   loginData: Login = new Login();
 
-  login(): void{
+  login(): void {
     this.authService.login(this.loginData).subscribe({
       next: response => {
         console.log('Login successful', response);
-        this.setSessionData("userSessionToken", response.token);
         this.router.navigate(['/dashboard']);
       },
       error: error => {
         console.error('Login failed: ', error.error.details);
         this.loginError = error.error.details;
       }
-  });
+    });
   }
 
-  setSessionData(key: string, value: any): void {
-    sessionStorage.setItem(key, JSON.stringify(value));
-  }
+  
 
   navigateTo(path: string) {
     this.router.navigate([path]); // or ['/', path]
@@ -48,11 +47,11 @@ export class LoginComponent {
 
   resetValue() {
     this.loginError = '';
-    this.loginData.username='';
-    this.loginData.password='';
+    this.loginData.username = '';
+    this.loginData.password = '';
   }
 
-  registrationRedirect(){
+  registrationRedirect() {
     this.router.navigate(['/registration']);
   }
 }

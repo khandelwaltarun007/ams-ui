@@ -1,42 +1,71 @@
 <div class="container mt-5">
-    <h2 class="text-center">Search Attendance Records</h2>
-    
-    <div class="d-flex justify-content-center mb-4">
-        <div data-mdb-input-init class="form-outline me-3" style="width: 14rem">
-            <input type="text" id="form1" class="form-control" placeholder="Search by Name" [(ngModel)]="searchName" />
-        </div>
-        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary" (click)="searchAttendances()">Search</button>
+  <h2 class="text-center">Search Attendance Records</h2>
+
+  <div class="d-flex justify-content-center mb-4">
+    <button type="button" class="btn btn-primary" (click)="searchAttendances()">Search</button>
+  </div>
+
+  <form>
+    <div class="text-right">
+      Total records: <strong>{{ totalRecords }}</strong>
     </div>
-    
-    <!--<form (ngSubmit)="onSearch()">-->
-    <form>
     <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">Employee Id</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Status</th>
-            <th scope="col">Comment</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let record of attendances; let i = index">
-                <th scope="row">{{ getSequenceNumber(i + 1)}}</th>
-                <td>{{ record.date }}</td>
-                <td>{{ record.userId }}</td>
-                <td>{{ record.fullname }}</td>
-                <td>{{ record.type }}</td>
-                <td>{{ record.status }}</td>
-                <td>{{ record.comment }}</td>
-              </tr>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">
+            Date
+            <input type="text" name="date" [(ngModel)]="searchDate" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search Date" />
+          </th>
+          <th scope="col">
+            Employee Id
+            <input type="text" name="userId" [(ngModel)]="searchUserId" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search ID" />
+          </th>
+          <th scope="col">
+            Full Name
+            <input type="text" name="fullname" [(ngModel)]="searchFullName" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search Name" />
+          </th>
+          <th scope="col">
+            Type
+            <input type="text" name="type" [(ngModel)]="searchType" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search Type" />
+          </th>
+          <th scope="col">
+            Status
+            <input type="text" name="status" [(ngModel)]="searchStatus" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search Status" />
+          </th>
+          <th scope="col">
+            Comment
+            <input type="text" name="comment" [(ngModel)]="searchComment" (input)="searchAttendances()" class="form-control form-control-sm" placeholder="Search Comment" />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of filteredAttendances; let i = index">
+          <th scope="row">{{ getSequenceNumber(i) }}</th>
+          <td>{{ record.date }}</td>
+          <td>{{ record.userId }}</td>
+          <td>{{ record.fullname }}</td>
+          <td>{{ record.type }}</td>
+          <td>{{ record.status }}</td>
+          <td>{{ record.comment }}</td>
+        </tr>
       </tbody>
     </table>
-    <div class="text-center">
-    <button class="btn" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
-    <button class="btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+
+    <div class="d-flex justify-content-between align-items-center text-center">
+      <div class="form-inline">
+        <label class="form-control" for="pageSize" class="me-2">Items per page:</label>
+        <select id="pageSize" class="form-control form-select" [(ngModel)]="pageSize" (change)="onPageSizeChange()" name="pageSize">
+          <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+      <div>
+        Page {{ currentPage + 1 }} of {{ totalPages }}
+      </div>
+      <div>
+        <button class="btn btn-secondary me-1" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+        <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+      </div>
     </div>
-  <!--</div>-->
-  
+  </form>
+</div>

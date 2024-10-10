@@ -1,0 +1,56 @@
+.container {
+    padding: 20px;
+}
+
+.table {
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray for alternate rows */
+}
+
+.table input[type="text"], .table input[type="checkbox"] {
+    margin: 0; /* Remove default margin */
+}
+
+.table input[type="text"] {
+    width: 100%; /* Full width for input */
+    padding: 8px; /* Padding for input */
+    box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+.btn {
+    margin: 5px; /* Space between buttons */
+}
+
+.btn:hover {
+    opacity: 0.9; /* Slight transparency on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Adjusting the page size select */
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-inline label {
+    margin-right: 10px;
+}
+
+.form-select {
+    margin-left: 10px; /* Space between label and select */
+}

@@ -1,25 +1,41 @@
-<div>
-    <form>
-        <div>
-            <label>Name of the person</label>
-            <select id="empName">
-                <option>SELECT</option>
-            </select>
+<div class="container mt-5">
+    <h2 class="text-center">Add Attendance Records</h2>
+    <div class="d-flex justify-content-center">
+        <form class="w-50" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="empName" class="form-label">Name of Employee:</label>
+                <input type="text" class="form-control" name="empName" readonly [(ngModel)]="fullName">
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Date:</label>
+                <input type="date" class="form-control" [(ngModel)]="attendanceRequest.date" name="date" required />
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status:</label>
+                <select id="attendanceSelect" class="form-select" (change)="onSelectChange($event)">
+                    <option value="" disabled selected>Select an option</option>
+                    <option *ngFor="let type of attendanceTypes" [value]="type.key">{{ type.value }}</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" [disabled]="isSubmitDisabled()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Attendance has been successfully marked!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div>
-            <label for="date">Date</label>
-            <input type="date" name="date"/>
-        </div>
-        <div>
-            <label for="status">Status</label>
-            <select name="status" id="status">
-                <option value="">Work from Office</option>
-                <option value="">Work from home</option>
-                <option value="">Planned Leave</option>
-                <option value="">Unplanned Leave</option>
-                <option value="">Sick Leave</option>
-                <option value="">Casual Leave</option>
-            </select>
-        </div>
-    </form>
+    </div>
 </div>
