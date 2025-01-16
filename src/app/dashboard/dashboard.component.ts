@@ -76,12 +76,12 @@ export class DashboardComponent implements OnInit {
       const date = new Date(record.date);
       const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
 
-      //if (record.type === 'WFO') {
+      if (record.type === 'WFO') {
       if (!this.monthlyWFOCounts[monthYear]) {
         this.monthlyWFOCounts[monthYear] = 0;
       }
       this.monthlyWFOCounts[monthYear]++;
-      //}
+      }
     });
   }
 
